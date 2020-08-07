@@ -1,25 +1,33 @@
 #Matrix for Free Throws
 #Bind the given vectors to form the matrix
 FreeThrows <- rbind(KobeBryant_FT, JoeJohnson_FT, LeBronJames_FT, CarmeloAnthony_FT, DwightHoward_FT, ChrisBosh_FT, ChrisPaul_FT, KevinDurant_FT, DerrickRose_FT, DwayneWade_FT)
+FreeThrows
+
 #Remove vectors - we don't need them anymore
-_(KobeBryant_FT, JoeJohnson_FT, CarmeloAnthony_FT, DwightHoward_FT, ChrisBosh_FT, LeBronJames_FT, ChrisPaul_FT, DerrickRose_FT, DwayneWade_FT, KevinDurant_FT)
+rm(KobeBryant_FT, JoeJohnson_FT, CarmeloAnthony_FT, DwightHoward_FT, ChrisBosh_FT, LeBronJames_FT, ChrisPaul_FT, DerrickRose_FT, DwayneWade_FT, KevinDurant_FT)
+
 #Rename the columns
-_(FreeThrows) <- _
+colnames(FreeThrows) <- Seasons
+FreeThrows
+
 #Rename the rows
-_(FreeThrows) <- _
+rownames(FreeThrows) <- Players
 
 #Check the matrix
 FreeThrows
 
 #Matrix for Free Throw Attempts
 #Bind the given vectors to form the matrix
-FreeThrowAttempts <- _(KobeBryant_FTA, JoeJohnson_FTA, LeBronJames_FTA, CarmeloAnthony_FTA, DwightHoward_FTA, ChrisBosh_FTA, ChrisPaul_FTA, KevinDurant_FTA, DerrickRose_FTA, DwayneWade_FTA)
+FreeThrowAttempts <- rbind(KobeBryant_FTA, JoeJohnson_FTA, LeBronJames_FTA, CarmeloAnthony_FTA, DwightHoward_FTA, ChrisBosh_FTA, ChrisPaul_FTA, KevinDurant_FTA, DerrickRose_FTA, DwayneWade_FTA)
+
 #Remove vectors - we don't need them anymore
-_(KobeBryant_FTA, JoeJohnson_FTA, CarmeloAnthony_FTA, DwightHoward_FTA, ChrisBosh_FTA, LeBronJames_FTA, ChrisPaul_FTA, DerrickRose_FTA, DwayneWade_FTA, KevinDurant_FTA)
+rm(KobeBryant_FTA, JoeJohnson_FTA, CarmeloAnthony_FTA, DwightHoward_FTA, ChrisBosh_FTA, LeBronJames_FTA, ChrisPaul_FTA, DerrickRose_FTA, DwayneWade_FTA, KevinDurant_FTA)
+
 #Rename the columns
-_(FreeThrowAttempts) <- _
+colnames(FreeThrowAttempts) <- Seasons
+
 #Rename the rows
-_(FreeThrowAttempts) <- _
+rownames(FreeThrowAttempts) <- Players
 
 #Check the matrix
 FreeThrowAttempts
@@ -31,16 +39,16 @@ myplot <- function(z, who=1:10) {
 }
 
 #Visualize the new matrices
-_(FreeThrows)
-_(FreeThrowAttempts)
+myplot(FreeThrows)
+myplot(FreeThrowAttempts)
 
 #Part 1 - Free Throw Attempts Per Game 
 #(You will need the Games matrix)
-myplot(_/_)
+myplot(FreeThrowAttempts/Games)
 #Notice how Chris Paul gets few attempts per game
 
 #Part 2 - Free Throw Accuracy
-myplot(_/_)
+myplot(FreeThrows/FreeThrowAttempts)
 #And yet Chris Paul's accuracy is one of the highest
 #Chances are his team would get more points if he had more FTA's
 #Also notice that Dwight Howard's FT Accuracy is extremely poor
@@ -51,12 +59,16 @@ myplot(FieldGoals/FieldGoalAttempts)
 #We will see just now...
 
 #Part 3 - Player Style Patterns Excluding Free Throws
-myplot((_-_)/_)
+#total points - FreeThrows (which are worth 1 point each)/FieldGoals
+myplot((Points-FreeThrows)/FieldGoals)
+
 #Because we have excluded free throws, this plot now shows us
 #the true representation of player style change. We can verify
 #that this is the case because all the marks without exception
 #on this plot are between 2 and 3. That is because Field Goals
 #can only be for either 2 points or 3 points.
+
+
 #Insights:
 #1. You can see how players' preference for 2 or 3 point shots
 #   changes throughout their career. We can see that almost all
